@@ -12,7 +12,7 @@ runs:
   using: "composite"
   steps:
   - name: swig-apt-deps
-    run: sudo apt install build-essential libpcre2-dev libpcre3-dev autoconf automake libtool bison git
+    run: sudo apt install build-essential libpcre2-dev libpcre3-dev autoconf automake libtool bison git -qq
     shell: bash
   - name: cache-swig
     if: startsWith(github.ref, 'refs/tags/v') != true
