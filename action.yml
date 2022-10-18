@@ -30,7 +30,7 @@ runs:
       cd swig_build_dir
       curl -s -L https://github.com/swig/swig/archive/refs/tags/v${{ inputs.version }}.tar.gz --output swig-src.tar.gz
       tar xf swig-src.tar.gz
-      cd swig-src
+      cd swig-${{ inputs.version }}
       ./autogen.sh
       ./configure
       make
@@ -38,7 +38,7 @@ runs:
     shell: bash
   - name: install-swig
     if: steps.cache-swig.outputs.cache-hit == 'true'
-    working-directory: swig_build_dir/swig-src
+    working-directory: swig_build_dir/swig-${{ inputs.version }}
     run: |
       sudo apt remove '^swig.*' -qq || true
       sudo make install
