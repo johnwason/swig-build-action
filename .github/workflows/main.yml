@@ -19,6 +19,6 @@ jobs:
     - name: swig build
       uses: ./
       with:
-        version: 4.2.0
+        version: 4.1.1
     - name: swig version
       run: swig -version
