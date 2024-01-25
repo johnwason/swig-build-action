@@ -12,6 +12,10 @@ jobs:
     name: test-swig-build-action
     steps:
     - uses: actions/checkout@v3
+    - name: apt
+      run: |
+        apt update
+        apt install -y sudo
     - name: swig build
       uses: ./
       with:
