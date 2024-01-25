@@ -8,12 +8,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
+    container: debian/buster:slim
     name: test-swig-build-action
     steps:
     - uses: actions/checkout@v3
     - name: swig build
       uses: ./
       with:
-        version: 4.0.2
+        version: 4.2.0
     - name: swig version
       run: swig -version
