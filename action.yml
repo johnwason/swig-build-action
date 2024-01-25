@@ -24,7 +24,7 @@ runs:
   - name: build-swig
     if: steps.cache-swig.outputs.cache-hit != 'true'
     run: |
-      sudo apt remove '^swig.*' -qq || true
+      sudo apt remove '^swig.*' -y -qq || true
       rm -rf swig_build_dir
       mkdir -p swig_build_dir
       cd swig_build_dir
