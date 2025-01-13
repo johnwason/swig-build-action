@@ -17,7 +17,7 @@ runs:
   - name: cache-swig
     if: startsWith(github.ref, 'refs/tags/v') != true
     id: cache-swig
-    uses: actions/cache@v2
+    uses: actions/cache@v4
     with:
       path: swig_build_dir
       key: ${{ runner.os }}-${{ inputs.version }}-swig-${{ inputs.cache-key }}
