@@ -11,7 +11,7 @@ jobs:
     container: debian:buster-slim
     name: test-swig-build-action
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: apt
       run: |
         apt update
