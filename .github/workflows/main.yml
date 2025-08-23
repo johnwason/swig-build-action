@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: debian:buster-slim
+    container: ubuntu:bionic
     name: test-swig-build-action
     steps:
     - uses: actions/checkout@v5
