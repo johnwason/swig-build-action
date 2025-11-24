@@ -11,7 +11,7 @@ jobs:
     container: ubuntu:focal
     name: test-swig-build-action
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
     - name: apt
       run: |
         apt update
