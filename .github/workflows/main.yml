@@ -48,9 +48,14 @@ jobs:
     steps:
     - uses: actions/checkout@v5
     - name: apt
+      if: ${{ matrix.config.container != '' }}
       run: |
         apt update
         apt install -y sudo tzdata
+    - name: apt
+      if: ${{ matrix.config.container == '' }}
+      run: |
+        sudo apt update
     - name: swig build
       uses: ./
       with:
