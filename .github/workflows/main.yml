@@ -7,18 +7,59 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    container: ubuntu:focal
+    runs-on: ${{ matrix.config.runs_on }}
+    container: ${{ matrix.config.container }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - os: ubuntu-20.04
+          runs_on: ubuntu-latest
+          container: "ubuntu:focal"
+          arch: x64
+        - os: ubuntu-22.04
+          runs_on: ubuntu-22.04
+          container: ""
+          arch: x64
+        - os: ubuntu-24.04
+          runs_on: ubuntu-22.04
+          container: ""
+          arch: x64
+        - os: debian-11
+          runs_on: ubuntu-latest
+          container: debian:bullseye-slim
+          arch: x64
+        - os: ubuntu-22.04-arm
+          runs_on: ubuntu-22.04-arm
+          container: ""
+          arch: arm64
+        - os: debian-testing
+          runs_on: ubuntu-latest
+          container: debian:testing-slim
+          arch: x64
+        - os: debian-unstable
+          runs_on: ubuntu-latest
+          container: debian:unstable-slim
+          arch: x64
     name: test-swig-build-action
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      TZ: Etc/Utc
     steps:
     - uses: actions/checkout@v5
     - name: apt
+      if: ${{ matrix.config.container != '' }}
       run: |
         apt update
-        apt install -y sudo
+        apt install -y sudo tzdata
+    - name: apt
+      if: ${{ matrix.config.container == '' }}
+      run: |
+        sudo apt update
     - name: swig build
       uses: ./
       with:
-        version: 4.1.1
+        version: 4.4.1
+        cache-key: "${{ matrix.config.container }}-${{ matrix.config.runs_on }}"
     - name: swig version
       run: swig -version
