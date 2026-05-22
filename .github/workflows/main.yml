@@ -60,5 +60,6 @@ jobs:
       uses: ./
       with:
         version: 4.4.1
+        cache-key: "${{ matrix.config.container }}-${{ matrix.config.runs_on }}"
     - name: swig version
       run: swig -version
